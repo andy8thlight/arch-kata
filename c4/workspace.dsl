@@ -4,27 +4,37 @@ workspace "MobilityCorp" "Description" {
 
     model {
         u = person "User"
-        s = person "Staff User"
-        bo = person "Back office"
+        s = person "Staff user"
+        bo = person "Back office user"
 
         ss = softwareSystem "Software System" {
             ua = container "User App"
             sa = container "Staff App"
+            boat = container "Back Office Admin Tool"
             bs = container "Booking service"
             pua = container "Passenger usage analyser"
             tfl = container "TfL API"
 
+            pls = container "Popular location store" {
+                tags "Database"
+            }
             db = container "Vehicle store" {
                 tags "Database"
             }
         }
 
+        // User
         u -> ss.ua "Uses"
         ss.ua -> ss.bs "Create / update / delete booking"
+
+        // Staff (field operative)
         s -> ss.sa "Uses"
 
-        bo -> ss.pua "Uses"
+        // Staff (back office)
+        bo -> ss.boat "Uses"
+        ss.boat -> ss.pua "Queries busy stations"
         ss.pua -> ss.tfl "Fetches passenger data"
+        ss.pua -> ss.pls "Persists popular locations"
 
     }
 
