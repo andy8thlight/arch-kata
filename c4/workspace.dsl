@@ -9,32 +9,45 @@ workspace "MobilityCorp" "Description" {
 
         payment_provider = softwareSystem "Payment Providers"
         tfl_api = softwareSystem "Transport for London"
+        google_maps = softwareSystem "Google Maps"
 
         mobility_corp = softwareSystem "Mobility Corp" {
             ua = container "User App" {
                 tags "Mobile App"
             }
 
+            ua -> google_maps "Shows map and gets routing information"
+
             sa = container "Operator App" {
                 tags "Mobile App"
             }
 
+            sa -> google_maps "Shows map and gets routing information"
+
             boat = container "Back Office Admin Tool" {
                 tags "Web App"
             }
+
+            boat -> google_maps "Shows fleet of vehicles on a map"
 
             booking_system = container "Booking system" {
                 booking_service = component "Booking Service" 
                 vehicle_store = component "Vehicle store" {
                     tags "Database"
                 }
+                booking_store = component "Booking database" {
+                    tags "Database"
+                }
         
                 booking_service -> vehicle_store "Queries for available vehicles"
+                booking_service -> booking_store "Stores/retrieves bookings"
         
                 payment_service = component "Payment Service"
                 booking_service -> payment_service "Makes payment/refunds for a booking"
                 payment_service -> payment_provider "Authorises/declines payment requests and takes money from renters account"
             }
+
+            ua -> booking_system "Create / update / delete booking"
 
             admin_system = container "Admin system" {
                 pua = component "Passenger usage analyser"
@@ -49,7 +62,6 @@ workspace "MobilityCorp" "Description" {
             boat -> admin_system.pua "Queries busy stations"
         }
 
-        google_maps = softwareSystem "Google Maps"
 
 
         mobility_corp -> google_maps "Gets routing information"
@@ -57,9 +69,6 @@ workspace "MobilityCorp" "Description" {
         // User
         renter -> mobility_corp "Finds and books vehicles with"
         renter -> mobility_corp.ua "Uses"
-        mobility_corp.ua -> mobility_corp.booking_system "Create / update / delete booking"
-        # mobility_corp.booking_service -> mobility_corp.vehicle_store "Queries for available vehicles"
-
 
         // Staff (field operative)
         operative -> mobility_corp.sa "Finds vehicles that need charging or moving"
@@ -71,22 +80,22 @@ workspace "MobilityCorp" "Description" {
     }
 
     views {
-        systemContext mobility_corp "Diagram1" {
+        systemContext mobility_corp "Context" {
             include *
             autolayout lr
         }
 
-        container mobility_corp "Diagram2" {
+        container mobility_corp "Container" {
             include *
             autolayout lr
         }
 
-        component mobility_corp.booking_system "Diagram3" {
+        component mobility_corp.booking_system "BookingSystem" {
             include *
             autolayout lr
         }
 
-        component mobility_corp.admin_system "Diagram4" {
+        component mobility_corp.admin_system "AdminSystem" {
             include *
             autolayout lr
         }
@@ -113,6 +122,9 @@ workspace "MobilityCorp" "Description" {
                 background #047804
             }
             element "Container" {
+                background #55aa55
+            }
+            element "Component" {
                 background #55aa55
             }
             element "Database" {
