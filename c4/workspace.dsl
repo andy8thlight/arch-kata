@@ -31,6 +31,10 @@ workspace "MobilityCorp" "Description" {
 
         tfl_api = softwareSystem "Transport for London"
         payment_provider = softwareSystem "Payment Providers"
+        google_maps = softwareSystem "Google Maps"
+
+
+        mobility_corp -> google_maps "Gets routing information"
        
         // User
         renter -> mobility_corp "Finds and books vehicles with"
