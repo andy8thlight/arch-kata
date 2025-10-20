@@ -8,6 +8,7 @@ workspace "MobilityCorp" "Description" {
         back_office_user = person "Back office user"
 
         payment_provider = softwareSystem "Payment Providers"
+        tfl_api = softwareSystem "Transport for London"
 
         mobility_corp = softwareSystem "Mobility Corp" {
             ua = container "User App" {
@@ -35,14 +36,19 @@ workspace "MobilityCorp" "Description" {
                 payment_service -> payment_provider "Authorises/declines payment requests and takes money from renters account"
             }
 
-            pua = container "Passenger usage analyser"
-
-            pls = container "Popular location store" {
-                tags "Database"
+            admin_system = container "Admin system" {
+                pua = component "Passenger usage analyser"
+                pls = component "Popular location store" {
+                    tags "Database"
+                }
+                pua -> tfl_api "Gets historic usage data of stations"
+                pua -> pls "Persists popular locations"
             }
+
+            boat -> booking_system "View / edit / cancel booking"
+            boat -> admin_system.pua "Queries busy stations"
         }
 
-        tfl_api = softwareSystem "Transport for London"
         google_maps = softwareSystem "Google Maps"
 
 
@@ -61,10 +67,6 @@ workspace "MobilityCorp" "Description" {
         // Staff (back office)
         back_office_user -> mobility_corp "Manages the inventory of vehicles"
         back_office_user -> mobility_corp.boat "Uses"
-        mobility_corp.boat -> mobility_corp.pua "Queries busy stations"
-        mobility_corp.boat -> mobility_corp.booking_system "View / edit / cancel booking"
-        mobility_corp.pua -> tfl_api "Gets historic usage data of stations"
-        mobility_corp.pua -> mobility_corp.pls "Persists popular locations"
 
     }
 
@@ -80,6 +82,11 @@ workspace "MobilityCorp" "Description" {
         }
 
         component mobility_corp.booking_system "Diagram3" {
+            include *
+            autolayout lr
+        }
+
+        component mobility_corp.admin_system "Diagram4" {
             include *
             autolayout lr
         }
