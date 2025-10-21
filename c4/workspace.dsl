@@ -12,6 +12,7 @@ workspace "MobilityCorp" "Description" {
         google_maps = softwareSystem "Google Maps"
 
         mobility_corp = softwareSystem "Mobility Corp" {
+
             ua = container "User App" {
                 tags "Mobile App"
             }
@@ -31,16 +32,28 @@ workspace "MobilityCorp" "Description" {
             boat -> google_maps "Shows fleet of vehicles on a map"
 
             booking_system = container "Booking system" {
+                returns_service = component "Returns service"
                 booking_service = component "Booking Service" 
+                api_gateway = component "API Gateway" "Provides facade to other services and provides token based access control"
+
+                api_gateway -> booking_service "Create bookings"
+                api_gateway -> returns_service "Return vehicle / upload photos"
+
                 vehicle_store = component "Vehicle store" {
                     tags "Database"
                 }
                 booking_store = component "Booking database" {
                     tags "Database"
                 }
+                photo_store = component "Photo store" "File system to keep photos of returned vehicles" {
+                    tags "Database"
+                }
         
                 booking_service -> vehicle_store "Queries for available vehicles"
                 booking_service -> booking_store "Stores/retrieves bookings"
+
+                returns_service -> vehicle_store "Marks booking as completed"
+                returns_service -> photo_store "Stores photo of completed booking"
         
                 payment_service = component "Payment Service"
                 booking_service -> payment_service "Makes payment/refunds for a booking"
@@ -48,15 +61,17 @@ workspace "MobilityCorp" "Description" {
             }
 
             ua -> booking_system "Create / update / delete booking"
+            ua -> booking_system.api_gateway "Create / update / delete booking / Return vehicle / upload photo""
 
             admin_system = container "Admin system" {
-                pua = component "Passenger usage analyser"
+                pua = component "Passenger usage analyser" "ML component that analyses past data to predict future usage patterns"
                 pls = component "Popular location store" {
                     tags "Database"
                 }
                 pua -> tfl_api "Gets historic usage data of stations"
                 pua -> pls "Persists popular locations"
             }
+
 
             boat -> booking_system "View / edit / cancel booking"
             boat -> admin_system.pua "Queries busy stations"
