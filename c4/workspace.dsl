@@ -489,36 +489,19 @@ workspace "MobilityCorp Architecture" "AI-enabled mobility platform overview" {
             include mobilityCorp.aiPlatform.weatherCollector
             include mobilityCorp.aiPlatform.telemetryIngest
             include mobilityCorp.aiPlatform.kafkaIngress
-            include mobilityCorp.aiPlatform.schemaRegistry
             include mobilityCorp.aiPlatform.streamProcessor
-            include mobilityCorp.aiPlatform.batchProcessor
             include mobilityCorp.aiPlatform.bronzeZone
             include mobilityCorp.aiPlatform.silverZone
             include mobilityCorp.aiPlatform.goldZone
-            include mobilityCorp.aiPlatform.exportApi
-            include mobilityCorp.aiPlatform.dqMonitor
-            include mobilityCorp.aiPlatform.metadataCatalog
-            include mobilityCorp.aiPlatform.dataObsAgent
-            include mobilityCorp.aiPlatform.featureRegistry
             include mobilityCorp.aiPlatform.transformationJob
+            include mobilityCorp.aiPlatform.featureRegistry
             include mobilityCorp.aiPlatform.onlineStore
             include mobilityCorp.aiPlatform.offlineStore
-            include mobilityCorp.aiPlatform.qualityMonitor
-            include mobilityCorp.aiPlatform.lineageTracker
-            include mobilityCorp.aiPlatform.featureObsAgent
             include mobilityCorp.aiPlatform.featureLoader
-            include mobilityCorp.aiPlatform.trainingScheduler
-            include mobilityCorp.aiPlatform.inferenceService
-            include mobilityCorp.aiPlatform.forecastPublisher
-            include mobilityCorp.aiPlatform.routingDataAdapter
-            include mobilityCorp.aiPlatform.contextAssembler
             include mobilityCorp.aiPlatform.featureConnector
-            include mobilityCorp.aiPlatform.conciergePolicyEvaluator
-            include mobilityCorp.aiPlatform.tierValidator
             include transportAPI
             include weatherAPI
             include eventFeeds
-            include mobilityCorp.observabilityStack
             autolayout lr 550 420 220
             title "AI Platform – Data Foundation"
         }
@@ -531,23 +514,11 @@ workspace "MobilityCorp Architecture" "AI-enabled mobility platform overview" {
             include mobilityCorp.aiPlatform.inferenceService
             include mobilityCorp.aiPlatform.forecastPublisher
             include mobilityCorp.aiPlatform.featureRegistry
-            include mobilityCorp.aiPlatform.transformationJob
             include mobilityCorp.aiPlatform.offlineStore
             include mobilityCorp.aiPlatform.onlineStore
-            include mobilityCorp.aiPlatform.qualityMonitor
-            include mobilityCorp.aiPlatform.lineageTracker
-            include mobilityCorp.aiPlatform.bronzeZone
-            include mobilityCorp.aiPlatform.silverZone
-            include mobilityCorp.aiPlatform.goldZone
-            include mobilityCorp.aiPlatform.routingDataAdapter
-            include mobilityCorp.aiPlatform.contextAssembler
             include mobilityCorp.aiPlatform.featureConnector
-            include mobilityCorp.aiPlatform.conciergePolicyEvaluator
-            include mobilityCorp.aiPlatform.tierValidator
-            include mobilityCorp.aiPlatform.providerRouter
-            include mobilityCorp.aiPlatform.taskApiGateway
-            include mobilityCorp.aiPlatform.routingApi
-            include mobilityCorp.aiPlatform.conciergeApi
+            include mobilityCorp.aiPlatform.contextAssembler
+            include mobilityCorp.aiPlatform.routingDataAdapter
             include mobilityCorp.bookingSystem.bookingService
             include mobilityCorp.fieldOpsApp
             include mobilityCorp.operationsAnalytics.stationPlanner
@@ -559,60 +530,35 @@ workspace "MobilityCorp Architecture" "AI-enabled mobility platform overview" {
         component mobilityCorp.aiPlatform "AIPlatformOperationalIntelligence" {
             include mobilityCorp.aiPlatform.taskApiGateway
             include mobilityCorp.aiPlatform.policyGate
-            include mobilityCorp.aiPlatform.featureConnector
             include mobilityCorp.aiPlatform.providerRouter
-            include mobilityCorp.aiPlatform.responseLocaliser
             include mobilityCorp.aiPlatform.routingApi
-            include mobilityCorp.aiPlatform.routingDataAdapter
-            include mobilityCorp.aiPlatform.routingConstraintBuilder
             include mobilityCorp.aiPlatform.routingSolver
-            include mobilityCorp.aiPlatform.routingPostProcessor
             include mobilityCorp.aiPlatform.routingPublisher
-            include mobilityCorp.aiPlatform.routingObsAgent
-            include mobilityCorp.aiPlatform.inferenceService
-            include mobilityCorp.aiPlatform.forecastPublisher
             include mobilityCorp.aiPlatform.conciergeApi
             include mobilityCorp.aiPlatform.contextAssembler
             include mobilityCorp.aiPlatform.recommenderEngine
-            include mobilityCorp.aiPlatform.conciergePolicyEvaluator
-            include mobilityCorp.aiPlatform.tierValidator
-            include mobilityCorp.aiPlatform.conciergeExplainer
-            include mobilityCorp.aiPlatform.conciergeObsAgent
-            include mobilityCorp.aiPlatform.trainingScheduler
-            include mobilityCorp.aiPlatform.featureLoader
-            include mobilityCorp.aiPlatform.onlineStore
-            include mobilityCorp.aiPlatform.offlineStore
+            include mobilityCorp.aiPlatform.responseLocaliser
+            include mobilityCorp.aiPlatform.inferenceService
             include mobilityCorp.bookingSystem.apiGateway
             include mobilityCorp.bookingSystem.bookingService
-            include mobilityCorp.bookingSystem.returnsService
             include mobilityCorp.fieldOpsApp
             include mobilityCorp.customerApp
-            include mobilityCorp.operationsAnalytics.stationPlanner
-            include mobilityCorp.billingService.pricingEngine
-            include mobilityCorp.billingService.invoiceManager
             autolayout lr 550 420 220
             title "AI Platform – Operational Intelligence"
         }
 
         component mobilityCorp.aiPlatform "AIPlatformConcierge" {
-            include mobilityCorp.aiPlatform.taskApiGateway
-            include mobilityCorp.aiPlatform.policyGate
-            include mobilityCorp.aiPlatform.featureConnector
-            include mobilityCorp.aiPlatform.providerRouter
-            include mobilityCorp.aiPlatform.responseLocaliser
             include mobilityCorp.aiPlatform.conciergeApi
             include mobilityCorp.aiPlatform.contextAssembler
             include mobilityCorp.aiPlatform.recommenderEngine
             include mobilityCorp.aiPlatform.conciergePolicyEvaluator
             include mobilityCorp.aiPlatform.tierValidator
             include mobilityCorp.aiPlatform.conciergeExplainer
-            include mobilityCorp.aiPlatform.conciergeObsAgent
-            include mobilityCorp.aiPlatform.inferenceService
-            include mobilityCorp.aiPlatform.forecastPublisher
+            include mobilityCorp.aiPlatform.featureConnector
             include mobilityCorp.aiPlatform.onlineStore
-            include mobilityCorp.aiPlatform.offlineStore
-            include mobilityCorp.bookingSystem.bookingService
+            include mobilityCorp.aiPlatform.forecastPublisher
             include mobilityCorp.customerApp
+            include mobilityCorp.bookingSystem.bookingService
             include mobilityCorp.governancePlatform.policyDataService
             include mobilityCorp.governancePlatform.subscriptionDirectory
             autolayout lr 550 420 220
