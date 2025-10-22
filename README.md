@@ -21,6 +21,7 @@ A series of documented decisions outlining the options we explored, the trade-of
 
 ### 2. `c4/` — *C4 Model Diagrams*  
 C4 diagrams representing the structure of our proposed solution, from system context to container and component levels.
+The static-files directory contains the static images, while the workspace.dsl can be run with structurizr
 
 ### 3. `docs/` — *Supporting Documentation*  
 This includes our **Product Requirements Document (PRD)**, and a high level mapping of component relationships and API Overview. The PRD was particularly useful in identifying key decisions that were later formalized in the ADRs.  
@@ -62,3 +63,9 @@ As part of this kata, we deliberately explored the **unique challenges that AI i
 In this kata and through our explorations, we developed a deeper appreciation for the **non-technical dimensions of AI architecture** where cost, governance, and lifecycle risks are as critical as performance or scalability.  
 
 ---
+
+## Reflections
+
+The time pressure was our biggest challenge, not only for completing the kata to a standard we were happy with, but also managing collaboration around a team with a wide range of other commitments. The scope of the application and the learning we tried to undertake were no small task.
+
+The challenge itself was really engaging, and offered lots of seams where we could either lean into the AI opportunities, or pursue non-ai options. We tried to document all of these thoughts in our ADRs.
