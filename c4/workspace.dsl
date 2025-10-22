@@ -490,10 +490,7 @@ workspace "MobilityCorp Architecture" "AI-enabled mobility platform overview" {
             include mobilityCorp.aiPlatform.telemetryIngest
             include mobilityCorp.aiPlatform.kafkaIngress
             include mobilityCorp.aiPlatform.streamProcessor
-            include mobilityCorp.aiPlatform.bronzeZone
-            include mobilityCorp.aiPlatform.silverZone
             include mobilityCorp.aiPlatform.goldZone
-            include mobilityCorp.aiPlatform.transformationJob
             include mobilityCorp.aiPlatform.featureRegistry
             include mobilityCorp.aiPlatform.onlineStore
             include mobilityCorp.aiPlatform.offlineStore
@@ -513,15 +510,10 @@ workspace "MobilityCorp Architecture" "AI-enabled mobility platform overview" {
             include mobilityCorp.aiPlatform.modelRegistryClient
             include mobilityCorp.aiPlatform.inferenceService
             include mobilityCorp.aiPlatform.forecastPublisher
-            include mobilityCorp.aiPlatform.featureRegistry
             include mobilityCorp.aiPlatform.offlineStore
             include mobilityCorp.aiPlatform.onlineStore
             include mobilityCorp.aiPlatform.featureConnector
-            include mobilityCorp.aiPlatform.contextAssembler
-            include mobilityCorp.aiPlatform.routingDataAdapter
             include mobilityCorp.bookingSystem.bookingService
-            include mobilityCorp.fieldOpsApp
-            include mobilityCorp.operationsAnalytics.stationPlanner
             include modelHost
             autolayout lr 550 420 220
             title "AI Platform – Model Lifecycle"
